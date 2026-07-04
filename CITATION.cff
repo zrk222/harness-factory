@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use HSF - Harness Software Factory, please cite the archived software release."
+title: "HSF - Harness Software Factory"
+version: "0.2.0"
+date-released: "2026-07-04"
+type: software
+authors:
+  - family-names: "Katz"
+    given-names: "Rick"
+    affiliation: "WizeMe"
+repository-code: "https://github.com/zrk222/harness-factory"
+url: "https://github.com/zrk222/harness-factory/releases/tag/v0.2.0"
+abstract: "HSF compiles declarative workflow specs into deterministic, gate-validated Python artifacts with signed artifacts, LTAP-style receipts, golden tests, and prompt-injection audit evidence."
+keywords:
+  - llm
+  - ai-agents
+  - prompt-injection
+  - deterministic-ai
+  - workflow-engine
+  - compiled-ai
+  - code-factory
+  - golden-tests
+  - audit-log
+  - ltap
+  - python
+license: "MIT"

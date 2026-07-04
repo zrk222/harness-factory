@@ -1,0 +1,41 @@
+{
+  "title": "HSF - Harness Software Factory",
+  "version": "0.2.0",
+  "upload_type": "software",
+  "publication_date": "2026-07-04",
+  "creators": [
+    {
+      "name": "Katz, Rick",
+      "affiliation": "WizeMe"
+    }
+  ],
+  "description": "HSF compiles declarative workflow specs into deterministic, gate-validated Python artifacts. The v0.2 release includes a prompt-injection demo, spec gallery, signed artifacts, LTAP-style receipts, CI evidence for Python 3.11 and 3.12, and public-use documentation for Claude Code, Codex, PyPI, GitHub, and human-in-the-loop review.",
+  "access_right": "open",
+  "license": "mit",
+  "language": "eng",
+  "keywords": [
+    "llm",
+    "ai-agents",
+    "prompt-injection",
+    "deterministic-ai",
+    "workflow-engine",
+    "compiled-ai",
+    "code-factory",
+    "golden-tests",
+    "audit-log",
+    "ltap",
+    "python"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/zrk222/harness-factory",
+      "relation": "isSupplementTo",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "https://github.com/zrk222/harness-factory/releases/tag/v0.2.0",
+      "relation": "isVersionOf",
+      "resource_type": "software"
+    }
+  ]
+}

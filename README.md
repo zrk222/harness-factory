@@ -309,6 +309,10 @@ technical feedback.
 For launch-channel sequencing, use
 [`docs/launch-playbook.md`](docs/launch-playbook.md).
 
+For Zenodo DOI publication, use
+[`docs/zenodo-publication.md`](docs/zenodo-publication.md). The repo includes
+`.zenodo.json` and `CITATION.cff` metadata for release archiving.
+
 ## Repository Map
 
 ```text
