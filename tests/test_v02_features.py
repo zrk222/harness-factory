@@ -50,10 +50,17 @@ def test_serve_endpoint(tmp_path, artifact_source):
     assert r2["status"] == "DENIED"
 
 def test_demo_runs_clean(capsys, monkeypatch, tmp_path):
-    import os, shutil
     root = Path(__file__).resolve().parents[1]
     monkeypatch.chdir(root)
     from hsf.demo import run_demo
     run_demo()
     out = capsys.readouterr().out
     assert "decision UNCHANGED" in out and "PASS" in out and "FAIL" not in out.replace("FAILED","")
+
+def test_demo_runs_from_empty_directory(capsys, monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
+    from hsf.demo import run_demo
+    run_demo()
+    out = capsys.readouterr().out
+    assert "The decision logic is static code" in out
+    assert "decision UNCHANGED" in out

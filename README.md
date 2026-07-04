@@ -99,10 +99,16 @@ python -m pip install -e ".[dev,serve]"
 pytest -q
 ```
 
+After the PyPI package is published, the install path is:
+
+```bash
+python -m pip install "harness-factory[serve]"
+```
+
 Expected test result:
 
 ```text
-48 passed
+49 passed
 ```
 
 Run the included GLP-1 prior authorization demo:
@@ -267,6 +273,9 @@ evidence.
 For full copy-paste instructions, see
 [`docs/agent-use.md`](docs/agent-use.md).
 
+For human-review workflows and HITL tool links, see
+[`docs/human-in-the-loop.md`](docs/human-in-the-loop.md).
+
 Use this short prompt in Claude Code, Codex, or another coding agent:
 
 ```text
@@ -296,6 +305,9 @@ If you want outside review, publish a GitHub release after CI is green and use
 [`docs/release-publication.md`](docs/release-publication.md) as the checklist.
 It includes suggested repo topics, release notes, and places to ask for
 technical feedback.
+
+For launch-channel sequencing, use
+[`docs/launch-playbook.md`](docs/launch-playbook.md).
 
 ## Repository Map
 

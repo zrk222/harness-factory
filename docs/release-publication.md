@@ -18,7 +18,7 @@ python -c "import json,glob; r=json.load(open(glob.glob('receipts/*.json')[0]));
 Expected evidence:
 
 ```text
-48 passed
+49 passed
 shipped: true
 accuracy: 1.0
 n: 40
@@ -82,7 +82,7 @@ manual review loops, and better audit evidence.
 
 ## Evidence
 
-- `pytest -q`: 48 passed
+- `pytest -q`: 49 passed
 - `hsf goldens registry_store/glp1_review-*.py glp1_review`: accuracy 1.0, n 40, correct 40
 - receipt integrity: shipped true
 
@@ -113,7 +113,7 @@ Repo: <repo url>
 Release: <release url>
 
 Evidence:
-- pytest: 48 passed
+- pytest: 49 passed
 - goldens: accuracy 1.0, n 40, correct 40
 - receipt: shipped true
 - CI: Python 3.11 + 3.12

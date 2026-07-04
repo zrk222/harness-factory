@@ -38,7 +38,7 @@ hsf = "hsf.cli:main"
 include = ["hsf*"]
 
 [tool.setuptools.package-data]
-hsf = ["**/*.j2", "**/*.md", "**/*.txt", "**/*.yaml"]
+hsf = ["**/*.j2", "**/*.jsonl", "**/*.md", "**/*.txt", "**/*.yaml"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
