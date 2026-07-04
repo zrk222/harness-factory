@@ -1,5 +1,7 @@
 # HSF - Harness Software Factory
 
+![HSF demo: prompt injection cannot move static compiled decision logic](docs/assets/demo.gif)
+
 ![HSF code factory design: spec to compiler to gates to signed artifact to orchestrator to receipt](docs/assets/code-factory-design.png)
 
 HSF turns a declarative workflow spec into a deterministic Python artifact,
@@ -15,6 +17,33 @@ The short version:
 
 This repository is meant to be easy to audit. The demo runs locally, needs no
 API key, and includes CI for Python 3.11 and 3.12.
+
+## 60-Second Demo
+
+Run the screenshot moment:
+
+```bash
+python -m pip install -e ".[dev,serve]"
+hsf demo
+```
+
+`hsf demo` compiles the reference workflow, walks all four gates, signs the
+artifact, runs it, then feeds it a live prompt-injection attempt. The output
+shows the decision unchanged and the injection marker flagged in the audit log.
+
+It closes on the repo thesis:
+
+```text
+The decision logic is static code. There is no prompt to inject.
+```
+
+The repo also includes `demo.tape` for VHS. If you have VHS installed, run:
+
+```bash
+vhs demo.tape
+```
+
+That renders the README demo GIF locally.
 
 ## What HSF Is For
 
@@ -66,14 +95,14 @@ Use Python 3.11 or newer.
 ```bash
 git clone https://github.com/zrk222/harness-factory.git
 cd harness-factory
-python -m pip install -e ".[dev]"
+python -m pip install -e ".[dev,serve]"
 pytest -q
 ```
 
 Expected test result:
 
 ```text
-38 passed
+48 passed
 ```
 
 Run the included GLP-1 prior authorization demo:
@@ -108,6 +137,16 @@ Expected decision:
 {"status": "APPROVED", "reason": "T2D Diagnosis"}
 ```
 
+Make it your own workflow:
+
+```bash
+hsf init my_workflow
+hsf compile specs/my_workflow.yaml
+hsf goldens registry_store/my_workflow-*.py my_workflow
+hsf badge receipts/my_workflow-*.receipt.json
+hsf serve registry_store/my_workflow-*.py
+```
+
 ## Command Guide
 
 `hsf validate specs/glp1_review.yaml`
@@ -129,6 +168,27 @@ metrics.
 
 Runs the verified artifact through the runtime orchestrator. The demo uses
 mocked extracted fields so it works without an API key.
+
+`hsf demo`
+
+Runs the full terminal demo: compile, gate, sign, run, prompt-injection
+attempt, unchanged decision, audit flag, and thesis line.
+
+`hsf init my_workflow`
+
+Scaffolds a new working spec and golden fixture set under `specs/` and
+`goldens/`. The generated workflow compiles and passes immediately, so users
+can start from their domain instead of editing the GLP-1 example.
+
+`hsf serve registry_store/glp1_review-*.py`
+
+Turns any signed artifact into a REST endpoint with `POST /run` and
+`GET /healthz`. Install with `python -m pip install -e ".[serve]"`.
+
+`hsf badge receipts/glp1_review-*.receipt.json`
+
+Generates an SVG badge from the receipt file. The badge is evidence-owned:
+the label and numbers come from the receipt, not hand-typed README metrics.
 
 `hsf bench --compile-tokens 34000`
 
@@ -183,6 +243,20 @@ A new workflow should require data changes, not code changes.
 
 The included `refund_review` workflow proves this pattern in the test suite:
 it compiles and passes goldens without changing compiler or runtime code.
+
+## Spec Gallery
+
+The repository includes five gallery workflows:
+
+- clinical prior authorization
+- refund review
+- content moderation
+- expense approval
+- lead scoring
+
+A parametrized test compiles every spec in `specs/` and requires 100 percent
+golden accuracy. When someone asks whether the factory generalizes, the answer
+is a green test, not a paragraph.
 
 ## Use With Claude Code Or Codex
 
@@ -251,7 +325,7 @@ No secrets are required for CI.
 
 ## Scope Notes
 
-HSF v0.1 is intentionally small and self-contained.
+HSF v0.2 is intentionally small and self-contained.
 
 - Signing is local HMAC-SHA256. The documented production upgrade is ed25519
   via `cryptography`.

@@ -19,7 +19,7 @@ pytest -q
 Expected result:
 
 ```text
-38 passed
+48 passed
 ```
 
 ## Claude Code Prompt
@@ -134,7 +134,7 @@ python -c "import json,glob; r=json.load(open(glob.glob('receipts/*.json')[0]));
 Expected evidence for the included demo:
 
 ```text
-38 passed
+48 passed
 accuracy: 1.0
 n: 40
 correct: 40

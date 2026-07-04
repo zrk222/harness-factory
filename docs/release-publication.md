@@ -18,7 +18,7 @@ python -c "import json,glob; r=json.load(open(glob.glob('receipts/*.json')[0]));
 Expected evidence:
 
 ```text
-38 passed
+48 passed
 shipped: true
 accuracy: 1.0
 n: 40
@@ -53,7 +53,7 @@ Compile YAML workflows into signed, gate-tested Python artifacts with LTAP recei
 ## Suggested First Release
 
 Use `v1.0.0` if the goal is public review and Release Radar-style visibility.
-Use `v0.1.0` if you want to label it as an early preview.
+Use `v0.2.0` if you want to label it as an early preview.
 
 Suggested release title:
 
@@ -82,7 +82,7 @@ manual review loops, and better audit evidence.
 
 ## Evidence
 
-- `pytest -q`: 38 passed
+- `pytest -q`: 48 passed
 - `hsf goldens registry_store/glp1_review-*.py glp1_review`: accuracy 1.0, n 40, correct 40
 - receipt integrity: shipped true
 
@@ -113,7 +113,7 @@ Repo: <repo url>
 Release: <release url>
 
 Evidence:
-- pytest: 38 passed
+- pytest: 48 passed
 - goldens: accuracy 1.0, n 40, correct 40
 - receipt: shipped true
 - CI: Python 3.11 + 3.12

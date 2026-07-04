@@ -7,8 +7,8 @@ def _load(spec_path):
     from hsf.spec import load_spec
     return load_spec(spec_path)
 
-def _goldens_for(spec_id: str) -> list[dict]:
-    p = Path("goldens") / spec_id / "cases.jsonl"
+def _goldens_for(spec_id: str, root: Path | None = None) -> list[dict]:
+    p = (root or Path(".")) / "goldens" / spec_id / "cases.jsonl"
     return [json.loads(l) for l in p.read_text().splitlines() if l.strip()]
 
 def _artifact_path(value: str) -> Path:
@@ -42,7 +42,8 @@ def cmd_compile(args):
     from hsf.gates.pipeline import run_pipeline, write_receipt
     from hsf.registry import store_artifact
     spec, sha = _load(args.spec)
-    goldens = _goldens_for(spec.workflow_spec)
+    root = Path(args.spec).resolve().parent.parent
+    goldens = _goldens_for(spec.workflow_spec, root)
     schema = _schema_of(spec)
     smoke = goldens[:5]
     def gate_runner(src):
@@ -72,6 +73,25 @@ def cmd_goldens(args):
     print(json.dumps(r.evidence, indent=2))
     sys.exit(0 if r.passed else 1)
 
+def cmd_init(args):
+    from hsf.scaffold import init_workflow
+    paths = init_workflow(args.name)
+    print("created:\n  " + "\n  ".join(str(x) for x in paths))
+    print(f"next: hsf compile specs/{args.name}.yaml")
+
+def cmd_demo(args):
+    from hsf.demo import run_demo
+    run_demo()
+
+def cmd_serve(args):
+    from hsf.serve import build_app
+    import uvicorn
+    uvicorn.run(build_app(str(_artifact_path(args.artifact))), host=args.host, port=args.port)
+
+def cmd_badge(args):
+    from hsf.badge import badge_from_receipt
+    print(badge_from_receipt(_artifact_path(args.receipt)))
+
 def cmd_bench(args):
     from hsf.telemetry import break_even
     print(json.dumps(break_even(args.compile_tokens), indent=2))
@@ -86,6 +106,12 @@ def main(argv=None):
     s = sub.add_parser("run"); s.add_argument("artifact"); s.add_argument("--text", default="")
     s.add_argument("--extracted", default=""); s.set_defaults(fn=cmd_run)
     s = sub.add_parser("goldens"); s.add_argument("artifact"); s.add_argument("spec_id"); s.set_defaults(fn=cmd_goldens)
+    s = sub.add_parser("init"); s.add_argument("name"); s.set_defaults(fn=cmd_init)
+    s = sub.add_parser("demo"); s.set_defaults(fn=cmd_demo)
+    s = sub.add_parser("serve"); s.add_argument("artifact")
+    s.add_argument("--host", default="127.0.0.1"); s.add_argument("--port", type=int, default=8317)
+    s.set_defaults(fn=cmd_serve)
+    s = sub.add_parser("badge"); s.add_argument("receipt"); s.set_defaults(fn=cmd_badge)
     s = sub.add_parser("bench"); s.add_argument("--compile-tokens", type=int, default=34000); s.set_defaults(fn=cmd_bench)
     args = p.parse_args(argv)
     args.fn(args)
