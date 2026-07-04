@@ -31,10 +31,20 @@ with:
 - `deposit:write`
 - `deposit:actions`
 
-Set it locally as `ZENODO_TOKEN`, then use the Zenodo deposit API to create the
-record, upload the release archive, apply metadata, and publish.
+Set it locally as `ZENODO_ACCESS_TOKEN`, then use the Zenodo deposit API to
+create the record, upload the release archive, apply metadata, and publish.
 
 Do not commit tokens to the repository.
+
+This repository also includes a direct helper:
+
+```bash
+python scripts/publish_zenodo.py --publish
+```
+
+The helper reads `ZENODO_ACCESS_TOKEN`, builds a git archive from `HEAD`,
+uploads it to Zenodo, applies `.zenodo.json`, publishes the record, and writes
+`docs/zenodo-publication-receipt.json`.
 
 ## Current Release
 
