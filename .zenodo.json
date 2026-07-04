@@ -36,6 +36,11 @@
       "identifier": "https://github.com/zrk222/harness-factory/releases/tag/v0.2.0",
       "relation": "isVersionOf",
       "resource_type": "software"
+    },
+    {
+      "identifier": "https://doi.org/10.5281/zenodo.21188398",
+      "relation": "isIdenticalTo",
+      "resource_type": "software"
     }
   ]
 }

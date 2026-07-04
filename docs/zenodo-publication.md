@@ -54,4 +54,9 @@ Current GitHub release:
 https://github.com/zrk222/harness-factory/releases/tag/v0.2.0
 ```
 
-After Zenodo returns a DOI, add the DOI badge and citation link to `README.md`.
+Published Zenodo archive:
+
+```text
+https://zenodo.org/records/21188398
+https://doi.org/10.5281/zenodo.21188398
+```

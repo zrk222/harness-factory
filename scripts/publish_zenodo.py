@@ -36,7 +36,10 @@ def upload_file(bucket_url: str, token: str, path: Path) -> dict:
         f"{bucket_url.rstrip('/')}/{path.name}",
         data=path.read_bytes(),
         method="PUT",
-        headers={"Authorization": f"Bearer {token}"},
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Content-Type": "application/octet-stream",
+        },
     )
     try:
         with urllib.request.urlopen(request, timeout=180) as response:
@@ -98,7 +101,11 @@ def main() -> int:
         "record_id": deposition.get("record_id") or deposition.get("id"),
         "doi": deposition.get("doi"),
         "doi_url": deposition.get("doi_url"),
-        "record_url": deposition.get("record_url") or deposition.get("links", {}).get("html"),
+        "record_url": (
+            deposition.get("record_url")
+            or deposition.get("links", {}).get("html")
+            or deposition.get("links", {}).get("self_html")
+        ),
         "archive": str(archive),
         "uploaded_file": upload.get("key") or upload.get("filename") or archive.name,
     }

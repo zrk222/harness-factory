@@ -1,5 +1,7 @@
 # HSF - Harness Software Factory
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21188398.svg)](https://doi.org/10.5281/zenodo.21188398)
+
 ![HSF demo: prompt injection cannot move static compiled decision logic](docs/assets/demo.gif)
 
 ![HSF code factory design: spec to compiler to gates to signed artifact to orchestrator to receipt](docs/assets/code-factory-design.png)
@@ -312,6 +314,8 @@ For launch-channel sequencing, use
 For Zenodo DOI publication, use
 [`docs/zenodo-publication.md`](docs/zenodo-publication.md). The repo includes
 `.zenodo.json` and `CITATION.cff` metadata for release archiving.
+
+Published archive: [10.5281/zenodo.21188398](https://doi.org/10.5281/zenodo.21188398).
 
 ## Repository Map
 

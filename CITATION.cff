@@ -10,6 +10,7 @@ authors:
     affiliation: "WizeMe"
 repository-code: "https://github.com/zrk222/harness-factory"
 url: "https://github.com/zrk222/harness-factory/releases/tag/v0.2.0"
+doi: "10.5281/zenodo.21188398"
 abstract: "HSF compiles declarative workflow specs into deterministic, gate-validated Python artifacts with signed artifacts, LTAP-style receipts, golden tests, and prompt-injection audit evidence."
 keywords:
   - llm
