@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "harness-factory"
+version = "0.1.0"
+description = "HSF - Harness Software Factory: compile declarative workflow specs into deterministic, gate-validated Python artifacts (Compiled AI with an LTAP factory gate)."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT OR Apache-2.0"
+dependencies = ["pydantic>=2.5", "PyYAML>=6.0", "jinja2>=3.1"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Code Generators",
+  "Topic :: Software Development :: Quality Assurance",
+]
+
+[project.urls]
+Homepage = "https://github.com/zrk222/harness-factory"
+Repository = "https://github.com/zrk222/harness-factory"
+Issues = "https://github.com/zrk222/harness-factory/issues"
+
+[project.optional-dependencies]
+llm = ["anthropic>=0.34"]
+guards = ["bandit>=1.7", "presidio-analyzer>=2.2"]
+dev = ["pytest>=8.0", "mypy>=1.8"]
+
+[project.scripts]
+hsf = "hsf.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["hsf*"]
+
+[tool.setuptools.package-data]
+hsf = ["**/*.j2", "**/*.md", "**/*.txt", "**/*.yaml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,22 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: pip install -e ".[dev]"
+      - run: pytest -q
+      - name: end-to-end compile + goldens (template engine, no secrets)
+        run: |
+          hsf validate specs/glp1_review.yaml
+          hsf compile specs/glp1_review.yaml
+          hsf goldens registry_store/glp1_review-*.py glp1_review
+      - name: receipt is evidence-owned
+        run: python -c "import json,glob; r=json.load(open(glob.glob('receipts/*.json')[0])); assert r['shipped'] and r['gates'][3]['evidence']['accuracy']==1.0"
