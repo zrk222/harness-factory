@@ -20,6 +20,25 @@ The short version:
 This repository is meant to be easy to audit. The demo runs locally, needs no
 API key, and includes CI for Python 3.11 and 3.12.
 
+## Code Factory target handoff
+
+The canonical [Code Factory baseplate](https://github.com/zrk222/code-factory)
+can emit blocked `worker`, `web`, `mobile`, and `agent-ui` starters from
+one reviewed prompt or PRD. HSF applies only when a target contains
+decision-shaped rules with explicit fields and goldens. It compiles that
+eligible decision path, not the entire app and not open-ended agent behavior.
+
+```mermaid
+flowchart LR
+    A["Intent"] --> B["Build and gate"]
+    B --> C["Compile and verify"]
+    C --> D["Signed receipts and human-owned ship"]
+```
+
+The baseplate compiler makes no model calls and grants no runtime authority.
+Any generated app remains blocked until its own tests, architecture, design,
+security, and human release gates pass.
+
 ## 60-Second Demo
 
 Run the screenshot moment:
